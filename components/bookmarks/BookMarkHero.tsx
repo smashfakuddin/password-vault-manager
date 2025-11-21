@@ -1,4 +1,18 @@
-export default function BookMarkHero() {
+import { auth } from "@/auth";
+import { dateExtractor } from "@/utils/dateextractor";
+
+export default async function BookMarkHero() {
+  const session = await auth();
+  const message = dateExtractor();
+  const date = new Date();
+  
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+  };
+  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
+
   return (
     <header className="border-b border-neutral-800 bg-gradient-to-b from-neutral-950 via-neutral-900/80 to-transparent">
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
@@ -8,11 +22,11 @@ export default function BookMarkHero() {
           </p>
           <div className="flex flex-col gap-3  ">
             <h1 className="text-4xl font-semibold tracking-tight">
-              Good Morning, World!
+              Good {message}, {session?.user?.name} !
             </h1>
             <span className="inline-flex w-40 items-center gap-2 rounded-full border border-neutral-800/80 bg-neutral-900/70 px-4 py-1 text-xs font-medium text-neutral-300">
               <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
-              Monday, Nov 10
+              {formattedDate}
             </span>
           </div>
           <p className="text-sm text-neutral-400 max-w-2xl">

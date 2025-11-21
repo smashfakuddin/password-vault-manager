@@ -1,6 +1,8 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { addPassword } from "@/db/query/index";
+import { signOut } from "next-auth/react";
 
 type FormData = {
   url: string;
@@ -10,7 +12,11 @@ type FormData = {
   password: string;
 };
 
-export default function BookMarkForm() {
+export default function BookMarkForm({
+  userId,
+}: {
+  userId: string | undefined;
+}) {
   const {
     register,
     handleSubmit,
@@ -22,12 +28,16 @@ export default function BookMarkForm() {
     },
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    const res = await addPassword({ ...data, userId });
+    console.log(res);
   };
 
   return (
     <div className="max-w-7xl mx-auto mt-8 px-4">
+      <button className=" p-5 bg-red " onClick={() => signOut()}>
+        signout
+      </button>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mb-10 rounded-2xl border border-neutral-800 bg-gradient-to-br from-neutral-900/70 to-neutral-800/40 p-8 shadow-2xl shadow-black/40 backdrop-blur"
