@@ -29,15 +29,14 @@ export default function BookMarkForm({
 
   const onSubmit = async (data: FormData) => {
     const res = await addPassword({ ...data, userId });
-    console.log(res);
+    reset();
   };
 
   return (
     <div className="max-w-7xl mx-auto mt-8 px-4">
-      
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mb-10 rounded-2xl border border-neutral-800 bg-gradient-to-br from-neutral-900/70 to-neutral-800/40 p-8 shadow-2xl shadow-black/40 backdrop-blur"
+        className="mb-10 rounded-2xl border border-neutral-800  from-neutral-900/70 to-neutral-800/40 p-8 shadow-2xl shadow-black/40 backdrop-blur"
       >
         {/* HEADER */}
         <div className="mb-8 flex flex-col gap-3">

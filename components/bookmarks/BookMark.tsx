@@ -3,7 +3,7 @@ import BookMarkForm from "./BookMarkForm";
 import BookMarkHero from "./BookMarkHero";
 import BookmarkShowCase from "./BookmarkShowCase";
 
-export default async function BookMark() {
+export default async function BookMark({ query }: { query: any }) {
   const session = await auth();
   return (
     <div
@@ -11,8 +11,8 @@ export default async function BookMark() {
     bg-neutral-900 text-white p-5 rounded-md my-10 container mx-auto "
     >
       <BookMarkHero />
-      <BookMarkForm userId={session?.user?.id}/>
-      <BookmarkShowCase userId={session?.user?.id}/>
+      <BookMarkForm userId={session?.user?.id} />
+      <BookmarkShowCase userId={session?.user?.id} query={query} />
     </div>
   );
 }

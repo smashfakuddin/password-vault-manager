@@ -21,10 +21,24 @@ export async function addPassword(data) {
   }
 }
 
-export async function getPasswordByUser(userId) {
+export async function getPasswordByUser(userId, query) {
   await dbConnect();
 
-  const res = await Password.find({ userId }).lean();
-  console.log("response ",userId)
+  const searchFilter = query
+    ? {
+        $or: [
+          { url: { $regex: query, $options: "i" } },
+          { username: { $regex: query, $options: "i" } },
+          { category: { $regex: query, $options: "i" } },
+          { notes: { $regex: query, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const res = await Password.find({
+    userId,
+    ...searchFilter,
+  }).lean();
+
   return res;
 }

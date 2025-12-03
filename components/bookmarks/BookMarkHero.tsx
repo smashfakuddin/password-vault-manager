@@ -15,7 +15,7 @@ export default async function BookMarkHero() {
   const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
 
   return (
-    <header className="border-b group border-neutral-800 bg-gradient-to-b from-neutral-950 via-neutral-900/80 to-transparent">
+    <header className="border-b group border-neutral-800  from-neutral-950 via-neutral-900/80 to-transparent">
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
         <div className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.4em] text-blue-400">
